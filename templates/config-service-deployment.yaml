@@ -37,7 +37,7 @@ spec:
             defaultMode: 420
       containers:
         - name: {{ $configServiceFullName }}
-          image: "{{ $.Values.configService.image.repository }}:{{ $.Values.configService.image.tag | default $.Chart.AppVersion }}"
+          image: "{{ $.Values.configService.image }}:{{ $.Values.configService.image.tag | default $.Chart.AppVersion }}"
           imagePullPolicy: {{ $.Values.configService.image.pullPolicy }}
           ports:
             - name: http
