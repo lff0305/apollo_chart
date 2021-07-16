@@ -16,7 +16,7 @@ data:
 {{- with . }}
 {{ $env := printf "%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-    {{- range $env, $address := .Values. }}
+    {{- range $env, $address := .Values.envs }}
     {{ $env }}.meta = {{ $configServiceFullName }}
     {{- end }}
 {{- end }}
