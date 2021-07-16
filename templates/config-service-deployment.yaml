@@ -43,7 +43,7 @@ spec:
       - name: init-db
         image: flyway/flyway:7.0.2
         command: ["/bin/sh"]
-        args: ["-c", "cd / && flyway migrate"]
+        args: ["-c", "cd / && sh decode_sql.sh && flyway migrate"]
         # args: ["migrate"]
         env:
         - name: _CHECKSUM
