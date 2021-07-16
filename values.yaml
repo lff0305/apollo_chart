@@ -137,6 +137,12 @@ portalService:
   readiness:
     initialDelaySeconds: 30
     periodSeconds: 5
+  env: {}
+  strategy: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
   config:
     # spring profiles to activate
     profiles: "github,auth"

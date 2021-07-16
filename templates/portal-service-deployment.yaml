@@ -31,7 +31,7 @@ spec:
                 path: application-github.properties
               - key: apollo-env.properties
                 path: apollo-env.properties
-            {{- range $fileName, $content := .Values.config.files }}
+            {{- range $fileName, $content := .Values.portalService.config.files }}
               - key: {{ $fileName }}
                 path: {{ $fileName }}
             {{- end }}
@@ -46,7 +46,7 @@ spec:
               protocol: TCP
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: {{ .Values.config.profiles | quote }}
+              value: {{ .Values.portalService.config.profiles | quote }}
           {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value }}
