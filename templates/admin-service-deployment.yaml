@@ -39,7 +39,7 @@ spec:
             defaultMode: 420
       containers:
         - name: {{ $.Values.adminService.name }}
-          image: "{{ $.Values.adminService.image.repository }}:{{ $.Values.adminService.image.tag | default .Chart.AppVersion }}"
+          image: "{{ $.Values.adminService.image.repository }}:{{ $.Values.adminService.image.tag | default $.Chart.AppVersion }}"
           imagePullPolicy: {{ $.Values.adminService.image.pullPolicy }}
           ports:
             - name: http
