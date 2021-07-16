@@ -46,8 +46,8 @@ spec:
         - name: _CHECKSUM
           {{ $root := . }}
           {{ $checksum := "" }}
-          {{ range $path, $bytes := .Files.Glob "files/flyway/scheduler/sqls/*.*" }}
-          {{ $c := $root.Files.Get $path | b64enc | sha256sum }}
+          {{ range $path, $bytes := $.Files.Glob "files/flyway/config/sqls/*.*" }}
+          {{ $c := $.Files.Get $path | b64enc | sha256sum }}
           {{ $checksum = printf "%s-%s" $checksum $c | sha256sum }}
           {{ end }}
           value: "{{ printf "%s" $checksum }}"
