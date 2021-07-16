@@ -13,7 +13,7 @@ data:
   {{ set $ "__db" $configDBSuffix }}
   flyway.conf: {{ tpl ($.Files.Get "files/flyway/config/flyway.conf") $ | quote }}
   {{ range $path, $bytes := $.Files.Glob "files/flyway/config/sqls/*.*" }}
-  {{ base $path }}: "{{ $.Files.Get $path | quote }}"
+  {{ base $path }}: "{{ $.Files.Get $path | b64enc }}"
   {{ end }}
 {{- end }}
 {{ end }}
