@@ -6,5 +6,5 @@ data:
   decode_sql.sh: {{ tpl ($.Files.Get "files/decode_sql.sh") $ | quote }}
   flyway.conf: {{ tpl ($.Files.Get "files/flyway/portal/flyway.conf") . | quote }}
   {{ range $path, $bytes := $.Files.Glob "files/flyway/portal/sqls/*.*" }}
-  {{ base $path }}.base64: "{{ tpl ($.Files.Get $path $)| b64enc }}"
+  {{ base $path }}.base64: "{{ tpl ($.Files.Get $path) $ | b64enc }}"
   {{ end }}
