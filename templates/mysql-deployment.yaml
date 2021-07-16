@@ -9,8 +9,6 @@ metadata:
     heritage: {{ .Release.Service | quote }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
-  securityContext:
-    fsGroup: 1001 
   replicas: {{ .Values.configdb.replicas | default 1 }}
   strategy: {}
   selector:
@@ -26,6 +24,8 @@ spec:
         app: {{ .Values.configdb.name | quote }}
         release: {{ .Release.Name | quote }}
     spec:
+      securityContext:
+        fsGroup: 1001 
       volumes:
       - name: config
         configMap:
