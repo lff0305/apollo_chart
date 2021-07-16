@@ -28,7 +28,8 @@ configService:
   name: apollo-configservice
   replicaCount: 1
   containerPort: 8080
-  image: apolloconfig/apollo-configservice
+  imageName: apolloconfig/apollo-configservice
+  # imageTag: latest
   imagePullSecrets: []
   service:
     fullNameOverride: ""
