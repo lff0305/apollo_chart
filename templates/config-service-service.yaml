@@ -3,6 +3,7 @@
 {{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
 {{ $configMapFullName := printf "apollo-configmap-%s" . -}}
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -19,3 +20,4 @@ spec:
   selector:
     app: {{ $configServiceFullName }}
 {{- end }}
+{{ end }}
