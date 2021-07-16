@@ -37,8 +37,8 @@ spec:
                 path: application-github.properties
             defaultMode: 420
         - name: init-db
-        configMap:
-          name: config-{{ . }}-initdb-configmap
+          configMap:
+            name: config-{{ . }}-initdb-configmap
       initContainers:
       - name: init-db
         image: flyway/flyway:7.0.2
