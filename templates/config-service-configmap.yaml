@@ -17,3 +17,4 @@ data:
     server.servlet.context-path = {{ .Values.configService.config.contextPath }}
     {{- end }}
 {{- end }}
+{{ end }}
