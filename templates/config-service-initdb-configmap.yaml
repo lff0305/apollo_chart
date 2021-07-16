@@ -1,0 +1,19 @@
+{{- range .Values.envs }}
+{{- with . }}
+{{ $configMapFullName := printf "apollo-configmap-%s" . -}}
+{{ $configDBSuffix := printf "%s" . -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
+{{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-{{ $configDBSuffix }}-initdb-configmap
+data:
+  flyway.conf: {{ tpl (.Files.Get "files/flyway/config/flyway.conf") $ | quote }}
+  {{ $root := . }}
+  {{ range $path, $bytes := .Files.Glob "files/flyway/config/sqls/*.*" }}
+  {{ base $path }}: "{{ $root.Files.Get $path | quote }}"
+  {{ end }}
+{{- end }}
+{{ end }}

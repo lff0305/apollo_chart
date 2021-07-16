@@ -36,6 +36,27 @@ spec:
               - key: application-github.properties
                 path: application-github.properties
             defaultMode: 420
+      initContainers:
+      - name: init-db
+        image: flyway/flyway:7.0.2
+        command: ["/bin/sh"]
+        args: ["-c", "cd / && flyway migrate"]
+        # args: ["migrate"]
+        env:
+        - name: _CHECKSUM
+          {{ $root := . }}
+          {{ $checksum := "" }}
+          {{ range $path, $bytes := .Files.Glob "files/flyway/scheduler/sqls/*.*" }}
+          {{ $c := $root.Files.Get $path | b64enc | sha256sum }}
+          {{ $checksum = printf "%s-%s" $checksum $c | sha256sum }}
+          {{ end }}
+          value: "{{ printf "%s" $checksum }}"
+        volumeMounts:
+        - name: init-db
+          mountPath: /flyway/sql_base64
+        - name: init-db
+          mountPath: /flyway/conf/flyway.conf
+          subPath: flyway.conf
       containers:
         - name: {{ $configServiceFullName }}
           image: "{{ $.Values.configService.imageName }}:{{ $.Values.configService.imageTag | default $.Chart.AppVersion }}"
