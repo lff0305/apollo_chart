@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: {{ $portalFullName }}
+  name: {{ .Values.portalService.name }}
   labels:
     {{- include "apollo.portal.labels" . | nindent 4 }}
 spec:
@@ -16,14 +16,14 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ $portalFullName }}
+        app: {{ .Values.portalService.name }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: configmap-{{ $portalFullName }}
+        - name: configmap-{{ .Values.portalService.name }}
           configMap:
             name: {{ $portalFullName }}
             items:
