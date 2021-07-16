@@ -20,3 +20,5 @@ spec:
       targetPort: {{ .Values.adminService.service.targetPort }}
   selector:
     app: {{ $adminServiceFullName }}
+{{- end }}
+{{ end }}
