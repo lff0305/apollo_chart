@@ -36,6 +36,30 @@ spec:
                 path: {{ $fileName }}
             {{- end }}
             defaultMode: 420
+      initContainers:
+      - name: init-db
+        image: flyway/flyway:7.0.2
+        command: ["/bin/sh"]
+        args: ["-c", "cd / && sh decode_sql.sh && flyway migrate"]
+        # args: ["migrate"]
+        env:
+        - name: _CHECKSUM
+          {{ $root := . }}
+          {{ $checksum := "" }}
+          {{ range $path, $bytes := $.Files.Glob "files/flyway/portal/sqls/*.*" }}
+          {{ $c := $.Files.Get $path | b64enc | sha256sum }}
+          {{ $checksum = printf "%s-%s" $checksum $c | sha256sum }}
+          {{ end }}
+          value: "{{ printf "%s" $checksum }}"
+        volumeMounts:
+        - name: init-db
+          mountPath: /flyway/sql_base64
+        - name: init-db
+          mountPath: /decode_sql.sh
+          subPath: decode_sql.sh
+        - name: init-db
+          mountPath: /flyway/conf/flyway.conf
+          subPath: flyway.conf
       containers:
         - name: {{ .Values.portalService.name }}
           image: "{{ .Values.portalService.image.repository }}:{{ .Values.portalService.image.tag | default .Chart.AppVersion }}"

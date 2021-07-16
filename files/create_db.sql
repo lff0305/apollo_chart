@@ -13,3 +13,7 @@ FLUSH PRIVILEGES;
 
 {{- end }}
 {{ end }}
+
+create database IF NOT EXISTS {{ $.Values.portaldb.dbName }} DEFAULT CHARACTER SET = utf8mb4;
+grant all on {{ $.Values.portaldb.dbName }}.* to  {{ $.Values.configdb.userName }}@'%';
+FLUSH PRIVILEGES;

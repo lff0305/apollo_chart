@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portal-initdb-configmap
+data:
+  decode_sql.sh: {{ tpl ($.Files.Get "files/decode_sql.sh") $ | quote }}
+  flyway.conf: {{ tpl ($.Files.Get "files/flyway/portal/flyway.conf") . | quote }}
+  {{ range $path, $bytes := $.Files.Glob "files/flyway/portal/sqls/*.*" }}
+  {{ base $path }}.base64: "{{ $.Files.Get $path | b64enc }}"
+  {{ end }}
