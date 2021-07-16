@@ -65,7 +65,7 @@ spec:
           {{- end }}
           livenessProbe:
             tcpSocket:
-              port: {{ .Values.containerPort }}
+              port: {{ .Values.portalService.containerPort }}
             initialDelaySeconds: {{ .Values.portalService.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.portalService.liveness.periodSeconds }}
           readinessProbe:
