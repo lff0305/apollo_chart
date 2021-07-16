@@ -9,14 +9,14 @@ apiVersion: v1
 metadata:
   name: {{ $configServiceFullName }}
   labels:
-    {{- include "apollo.service.labels" . | nindent 4 }}
+    {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
-  type: {{ .Values.configService.service.type }}
+  type: {{ $.Values.configService.service.type }}
   ports:
     - name: http
       protocol: TCP
-      port: {{ .Values.configService.service.port }}
-      targetPort: {{ .Values.configService.service.targetPort }}
+      port: {{ $.Values.configService.service.port }}
+      targetPort: {{ $.Values.configService.service.targetPort }}
   selector:
     app: {{ $configServiceFullName }}
 {{- end }}
