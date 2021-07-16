@@ -1,0 +1,21 @@
+{{- range .Values.env }}
+{{- with . }}
+{{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
+{{ $configMapFullName := printf "apollo-configmap-%s" . -}}
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $configServiceFullName }}
+  labels:
+    {{- include "apollo.service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.configService.service.type }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.configService.service.port }}
+      targetPort: {{ .Values.configService.service.targetPort }}
+  selector:
+    app: {{ $configServiceFullName }}
+{{- end }}

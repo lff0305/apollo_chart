@@ -1,0 +1,82 @@
+{{- range .Values.env }}
+{{- with . }}
+{{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
+{{ $configMapFullName := printf "apollo-configmap-%s" . -}}
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ $configDeploymentFullName }}
+  labels:
+    {{- include "apollo.service.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.configService.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ $configServiceFullName }}
+  {{- with .Values.configService.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        app: {{ $configServiceFullName }}
+    spec:
+      {{- with .Values.configService.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: volume-configmap-{{ $configMapFullName }}
+          configMap:
+            name: {{ $configMapFullName }}
+            items:
+              - key: application-github.properties
+                path: application-github.properties
+            defaultMode: 420
+      containers:
+        - name: {{ $configServiceFullName }}
+          image: "{{ $.Values.configService.image.repository }}:{{ .Values.configService.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.configService.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.configService.containerPort }}
+              protocol: TCP
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.configService.config.profiles | quote }}
+          {{- range $key, $value := .Values.configService.env }}
+            - name: {{ $key }}
+              value: {{ $value }}
+          {{- end }}
+          volumeMounts:
+            - name: volume-configmap-{{ $configMapFullName }}
+              mountPath: /apollo-configservice/config/application-github.properties
+              subPath: application-github.properties
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.configService.containerPort }}
+            initialDelaySeconds: {{ .Values.configService.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.configService.liveness.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.configService.config.contextPath }}/health
+              port: {{ .Values.configService.containerPort }}
+            initialDelaySeconds: {{ .Values.configService.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.configService.readiness.periodSeconds }}
+          resources:
+            {{- toYaml .Values.configService.resources | nindent 12 }}
+    {{- with .Values.configService.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.configService.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.configService.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{ -end }}
