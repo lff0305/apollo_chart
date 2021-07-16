@@ -7,14 +7,11 @@ envs:
 
 
 configdb:
-  enabled: false
+  enabled: true
   name: apollo-configdb
-  # apolloconfigdb host
   port: 3306
   dbName: ApolloConfigDB
-  # apolloconfigdb user name
   userName: "apollo"
-  # apolloconfigdb password
   password: "apollo"
   connectionStringProperties: characterEncoding=utf8&useSSL=false
   service:
@@ -23,6 +20,8 @@ configdb:
     fullNameOverride: ""
     port: 3306
     type: ClusterIP
+  nodeSelector: {}    
+    
 
 configService:
   name: apollo-configservice

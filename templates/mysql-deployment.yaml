@@ -1,0 +1,47 @@
+{{- if .Values.configdb.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.configdb.name | quote }}
+  labels:
+    app: {{ .Values.configdb.name | quote }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+spec:
+  replicas: {{ .Values.configdb.replicas | default .Values.defaults.replicas }}
+  strategy: {}
+  selector:
+    matchLabels:
+      app: {{ .Values.configdb.name | quote }}
+      release: {{ .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.configdb.name | quote }}
+        release: {{ .Release.Name | quote }}
+      labels:
+        app: {{ .Values.configdb.name | quote }}
+        release: {{ .Release.Name | quote }}
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Values.configdb.name }}-configmap
+          defaultMode: 0755
+      containers:
+      - name: {{ .Values.configdb.name | quote }}
+        env:
+        - name: TOKEN
+          value: {{ .Values.configdb.token | quote }}
+        image: "{{ .Values.configdb.registryUrl | default .Values.defaults.registryUrl }}/{{ .Values.configdb.imageName }}:{{ .Values.configdb.imageTag | default .Values.defaults.imageTag }}"
+        volumeMounts:
+        - mountPath: /docker-entrypoint-initdb.d/decode_base64.sh
+          name: config
+          subPath: decode_base64.sh
+      restartPolicy: Always
+    {{- with $.Values.configdb.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}      
+{{- end -}}
