@@ -25,7 +25,7 @@ spec:
     spec:
       {{- with $.Values.configService.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml $ | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
         - name: volume-configmap-{{ $configMapFullName }}
@@ -37,7 +37,7 @@ spec:
             defaultMode: 420
       containers:
         - name: {{ $configServiceFullName }}
-          image: "{{ $$.Values.configService.image.repository }}:{{ $.Values.configService.image.tag | default .Chart.AppVersion }}"
+          image: "{{ $.Values.configService.image.repository }}:{{ $.Values.configService.image.tag | default $.Chart.AppVersion }}"
           imagePullPolicy: {{ $.Values.configService.image.pullPolicy }}
           ports:
             - name: http
