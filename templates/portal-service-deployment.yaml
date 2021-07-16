@@ -8,7 +8,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ $portalFullName }}
+      app: {{ .Values.portalService.name }}
   {{- with .Values.strategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
@@ -25,7 +25,7 @@ spec:
       volumes:
         - name: configmap-{{ .Values.portalService.name }}
           configMap:
-            name: {{ $portalFullName }}
+            name: {{ .Values.portalService.name }}
             items:
               - key: application-github.properties
                 path: application-github.properties
@@ -52,14 +52,14 @@ spec:
               value: {{ $value }}
           {{- end }}
           volumeMounts:
-            - name: configmap-{{ $portalFullName }}
+            - name: configmap-{{ .Values.portalService.name }}
               mountPath: /apollo-portal/config/application-github.properties
               subPath: application-github.properties
-            - name: configmap-{{ $portalFullName }}
+            - name: configmap-{{ .Values.portalService.name }}
               mountPath: /apollo-portal/config/apollo-env.properties
               subPath: apollo-env.properties
           {{- range $fileName, $content := .Values.config.files }}
-            - name: configmap-{{ $portalFullName }}
+            - name: configmap-{{ .Values.portalService.name }}
               mountPath: /apollo-portal/config/{{ $fileName }}
               subPath: {{ $fileName }}
           {{- end }}
