@@ -10,7 +10,7 @@ kind: ConfigMap
 metadata:
   name: config-{{ $configDBSuffix }}-initdb-configmap
 data:
-  {{ $.__db := $configDBSuffix }}
+  {{ set $ "__db" $configDBSuffix }}
   flyway.conf: {{ tpl ($.Files.Get "files/flyway/config/flyway.conf") $ | quote }}
   {{ range $path, $bytes := $.Files.Glob "files/flyway/config/sqls/*.*" }}
   {{ base $path }}: "{{ $.Files.Get $path | quote }}"
