@@ -2,17 +2,19 @@
 {{- with . }}
 {{ $configMapFullName := printf "apollo-configmap-%s" . -}}
 {{ $configDBSuffix := printf "apollo-config-db-%s" . -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
+{{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: {{ $configMapFullName }}
 data:
   application-github.properties: |
-    spring.datasource.url = jdbc:mysql://{{include "apollo.configdb.serviceName" .}}:{{include "apollo.configdb.servicePort" .}}/{{ .Values.configdb.dbName }}-$configDBSuffix{{ if .Values.configdb.connectionStringProperties }}?{{ .Values.configdb.connectionStringProperties }}{{ end }}
-    spring.datasource.username = {{ required "configdb.userName is required!" .Values.configdb.userName }}
-    spring.datasource.password = {{ required "configdb.password is required!" .Values.configdb.password }}
-    apollo.config-service.url = {{ include "apollo.configService.serviceUrl" .}}
-    apollo.admin-service.url = {{ include "apollo.adminService.serviceUrl" .}}
+    spring.datasource.url = jdbc:mysql://{{ $.Values.configdb.name }}:{{ $.Values.configdb.port }}/{{ .Values.configdb.dbName }}-$configDBSuffix{{ if $.Values.configdb.connectionStringProperties }}?{{ $.Values.configdb.connectionStringProperties }}{{ end }}
+    spring.datasource.username = {{ required "configdb.userName is required!" $.Values.configdb.userName }}
+    spring.datasource.password = {{ required "configdb.password is required!" $.Values.configdb.password }}
+    apollo.config-service.url = {{ $configServiceFullName }}
+    apollo.admin-service.url = {{ $adminServiceFullName }}
     {{- if .Values.configService.config.contextPath }}
     server.servlet.context-path = {{ .Values.configService.config.contextPath }}
     {{- end }}

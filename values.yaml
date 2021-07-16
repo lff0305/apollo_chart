@@ -7,7 +7,7 @@ envs:
 
 
 configdb:
-  enabled: true
+  enabled: false
   name: apollo-configdb
   # apolloconfigdb host
   port: 3306
