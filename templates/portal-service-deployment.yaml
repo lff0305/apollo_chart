@@ -23,9 +23,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: configmap-{{ .Values.portalService.name }}
+        - name: {{ .Values.portalService.name }}-configmap
           configMap:
-            name: {{ .Values.portalService.name }}
+            name: {{ .Values.portalService.name }}-configmap
             items:
               - key: application-github.properties
                 path: application-github.properties
@@ -52,14 +52,14 @@ spec:
               value: {{ $value }}
           {{- end }}
           volumeMounts:
-            - name: configmap-{{ .Values.portalService.name }}
+            - name: {{ .Values.portalService.name }}-configmap
               mountPath: /apollo-portal/config/application-github.properties
               subPath: application-github.properties
-            - name: configmap-{{ .Values.portalService.name }}
+            - name: {{ .Values.portalService.name }}-configmap
               mountPath: /apollo-portal/config/apollo-env.properties
               subPath: apollo-env.properties
           {{- range $fileName, $content := .Values.portalService.config.files }}
-            - name: configmap-{{ .Values.portalService.name }}
+            - name: {{ .Values.portalService.name }}-configmap
               mountPath: /apollo-portal/config/{{ $fileName }}
               subPath: {{ $fileName }}
           {{- end }}
