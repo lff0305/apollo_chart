@@ -38,7 +38,7 @@ spec:
       containers:
         - name: {{ $configServiceFullName }}
           image: "{{ $.Values.configService.imageName }}:{{ $.Values.configService.imageTag | default $.Chart.AppVersion }}"
-          imagePullPolicy: {{ $.Values.configService.image.pullPolicy }}
+          imagePullPolicy: {{ $.Values.configService.imagePullPolicy }}
           ports:
             - name: http
               containerPort: {{ $.Values.configService.containerPort }}

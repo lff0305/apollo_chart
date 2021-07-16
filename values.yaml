@@ -29,6 +29,7 @@ configService:
   replicaCount: 1
   containerPort: 8080
   imageName: apolloconfig/apollo-configservice
+  imagePullPolicy: IfNotPresent
   # imageTag: latest
   imagePullSecrets: []
   service:
