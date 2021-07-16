@@ -10,7 +10,7 @@ apiVersion: apps/v1
 metadata:
   name: {{ $adminServiceFullName }}
   labels:
-    {{- include "apollo.service.labels" . | nindent 4 }}
+    {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
   replicas: {{ $.Values.adminService.replicaCount }}
   selector:
