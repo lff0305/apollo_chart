@@ -106,4 +106,38 @@ adminService:
   resources: {}
   nodeSelector: {}
   tolerations: []
-  affinity: {}         
+  affinity: {}     
+
+portalService:
+  name: apollo-portal
+  fullNameOverride: ""
+  replicaCount: 1
+  containerPort: 8070
+  image:
+    repository: apolloconfig/apollo-portal
+    tag: ""
+    pullPolicy: IfNotPresent
+  imagePullSecrets: []
+  service:
+    fullNameOverride: ""
+    port: 8070
+    targetPort: 8070
+    type: ClusterIP
+    sessionAffinity: ClientIP
+  ingress:
+    enabled: false
+    annotations: {}
+    hosts:
+    - host: ""
+    paths: []
+    tls: []
+  liveness:
+    initialDelaySeconds: 100
+    periodSeconds: 10
+  readiness:
+    initialDelaySeconds: 30
+    periodSeconds: 5
+
+portaldb:
+  dbName: ApolloPortalDB
+  connectionStringProperties: characterEncoding=utf8&useSSL=false
