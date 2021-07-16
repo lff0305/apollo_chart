@@ -9,6 +9,8 @@ metadata:
     heritage: {{ .Release.Service | quote }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
+  securityContext:
+    fsGroup: 1001 
   replicas: {{ .Values.configdb.replicas | default 1 }}
   strategy: {}
   selector:
