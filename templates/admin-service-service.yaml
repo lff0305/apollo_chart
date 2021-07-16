@@ -16,8 +16,8 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: {{ .Values.adminService.service.port }}
-      targetPort: {{ .Values.adminService.service.targetPort }}
+      port: {{ $.Values.adminService.service.port }}
+      targetPort: {{ $.Values.adminService.service.targetPort }}
   selector:
     app: {{ $adminServiceFullName }}
 {{- end }}
