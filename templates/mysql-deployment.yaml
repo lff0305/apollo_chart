@@ -29,6 +29,9 @@ spec:
         configMap:
           name: {{ .Values.configdb.name }}-configmap
           defaultMode: 0755
+      - name: data
+        persistentVolumeClaim:
+          claimName: mysql-data
       containers:
       - name: {{ .Values.configdb.name | quote }}
         env:
@@ -36,9 +39,11 @@ spec:
           value: {{ .Values.configdb.token | quote }}
         image: "{{ .Values.configdb.registryUrl | default .Values.defaults.registryUrl }}/{{ .Values.configdb.imageName }}:{{ .Values.configdb.imageTag | default .Values.defaults.imageTag }}"
         volumeMounts:
-        - mountPath: /docker-entrypoint-initdb.d/decode_base64.sh
+        - mountPath: /docker-entrypoint-initdb.d/create_db.sql
           name: config
-          subPath: decode_base64.sh
+          subPath: create_db.sql
+        - name: data
+          mountPath: /bitnami/mysql/data
       restartPolicy: Always
     {{- with $.Values.configdb.nodeSelector }}
       nodeSelector:
