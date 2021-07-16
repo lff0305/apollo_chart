@@ -115,7 +115,7 @@ portalService:
   containerPort: 8070
   image:
     repository: apolloconfig/apollo-portal
-    tag: ""
+    tag: "1.8.2"
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   service:

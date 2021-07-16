@@ -37,17 +37,17 @@ spec:
             {{- end }}
             defaultMode: 420
       containers:
-        - name: {{ .Values.name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: {{ .Values.portalService.name }}
+          image: "{{ .Values.portalService.image.repository }}:{{ .Values.portalService.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.portalService.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.containerPort }}
+              containerPort: {{ .Values.portalService.containerPort }}
               protocol: TCP
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.portalService.config.profiles | quote }}
-          {{- range $key, $value := .Values.env }}
+          {{- range $key, $value := .Values.portalService.env }}
             - name: {{ $key }}
               value: {{ $value }}
           {{- end }}
@@ -66,14 +66,14 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.containerPort }}
-            initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
+            initialDelaySeconds: {{ .Values.portalService.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.liveness.periodSeconds }}
           readinessProbe:
             httpGet:
-              path: {{ .Values.config.contextPath }}/health
-              port: {{ .Values.containerPort }}
-            initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
-            periodSeconds: {{ .Values.readiness.periodSeconds }}
+              path: {{ .Values.portalService.config.contextPath }}/health
+              port: {{ .Values.portalService.containerPort }}
+            initialDelaySeconds: {{ .Values.portalService.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.portalService.readiness.periodSeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
     {{- with .Values.nodeSelector }}
