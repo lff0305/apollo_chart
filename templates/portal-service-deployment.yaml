@@ -58,7 +58,7 @@ spec:
             - name: configmap-{{ .Values.portalService.name }}
               mountPath: /apollo-portal/config/apollo-env.properties
               subPath: apollo-env.properties
-          {{- range $fileName, $content := .Values.config.files }}
+          {{- range $fileName, $content := .Values.portalService.config.files }}
             - name: configmap-{{ .Values.portalService.name }}
               mountPath: /apollo-portal/config/{{ $fileName }}
               subPath: {{ $fileName }}
