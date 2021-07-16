@@ -36,6 +36,9 @@ spec:
                 path: {{ $fileName }}
             {{- end }}
             defaultMode: 420
+        - name: init-db
+          configMap:
+            name: portal-initdb-configmap
       initContainers:
       - name: init-db
         image: flyway/flyway:7.0.2
