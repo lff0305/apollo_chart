@@ -7,7 +7,7 @@ data:
     spring.datasource.url = jdbc:mysql://{{ $.Values.configdb.name }}:{{ $.Values.configdb.port }}/{{ .Values.portaldb.dbName }}{{ if .Values.portaldb.connectionStringProperties }}?{{ .Values.portaldb.connectionStringProperties }}{{ end }}
     spring.datasource.username = {{ required "configdb.userName is required!" .Values.configdb.userName }}
     spring.datasource.password = {{ required "configdb.password is required!" .Values.configdb.password }}
-    apollo.portal.envs ={{ join "," .Values.envs }}
+    apollo.portal.envs = {{ join "," .Values.envs }}
     {{- if .Values.configService.contextPath }}
     server.servlet.context-path = {{ .Values.config.contextPath }}
     {{- end }}
@@ -16,7 +16,7 @@ data:
 {{- with . }}
 {{ $env := printf "%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-    {{- range $env, $address := .Values.portalService.envs }}
+    {{- range $env, $address := .Values.envs }}
     {{ $env }}.meta = {{ printf "apollo-config-service-%s" . }}
     {{- end }}
 {{- end }}
