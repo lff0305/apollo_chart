@@ -1,0 +1,10 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql-data
+  annotations:
+    volume.beta.kubernetes.io/storage-class: gp2
+spec:
+  resources:
+    requests:
+      storage: 512Mi
