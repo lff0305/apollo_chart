@@ -9,7 +9,7 @@ metadata:
     heritage: {{ .Release.Service | quote }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
-  replicas: {{ .Values.configdb.replicas | default .Values.defaults.replicas }}
+  replicas: {{ .Values.configdb.replicas | default 1 }}
   strategy: {}
   selector:
     matchLabels:
