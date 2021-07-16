@@ -12,16 +12,16 @@ data:
     server.servlet.context-path = {{ .Values.config.contextPath }}
     {{- end }}
   apollo-env.properties: |
-{{- range .Values.envs }}
+{{- range .Values.portalService.envs }}
 {{- with . }}
 {{ $env := printf "%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-    {{- range $env, $address := .Values.envs }}
-    {{ $env }}.meta = {{ $configServiceFullName }}
+    {{- range $env, $address := .Values.portalService.envs }}
+    {{ $env }}.meta = {{ printf "apollo-config-service-%s" . }}
     {{- end }}
 {{- end }}
 {{ end }}    
-{{- range $fileName, $content := .Values.config.files }}
+{{- range $fileName, $content := .Values.portalService.config.files }}
 {{ $fileName | indent 2 }}: |
 {{ $content | indent 4 }}
 {{- end }}
