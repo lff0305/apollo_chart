@@ -15,7 +15,7 @@ data:
     spring.datasource.password = {{ required "configdb.password is required!" $.Values.configdb.password }}
     apollo.config-service.url = {{ $configServiceFullName }}
     apollo.admin-service.url = {{ $adminServiceFullName }}
-    {{- if .Values.configService.config.contextPath }}
+    {{- if $.Values.configService.config.contextPath }}
     server.servlet.context-path = {{ $.Values.configService.config.contextPath }}
     {{- end }}
 {{- end }}
