@@ -12,7 +12,7 @@ metadata:
   labels:
     {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
-  type: {{ .Values.adminService.service.type }}
+  type: {{ $.Values.adminService.service.type }}
   ports:
     - name: http
       protocol: TCP
