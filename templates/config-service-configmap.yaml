@@ -1,4 +1,4 @@
-{{- range .Values.env }}
+{{- range .Values.envs }}
 {{- with . }}
 {{ $configMapFullName := printf "apollo-configmap-%s" . -}}
 {{ $configDBSuffix := printf "apollo-config-db-%s" . -}}

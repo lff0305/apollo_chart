@@ -1,4 +1,4 @@
-{{- range .Values.env }}
+{{- range .Values.envs }}
 {{- with . }}
 {{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
