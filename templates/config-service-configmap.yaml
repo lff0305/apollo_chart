@@ -4,6 +4,7 @@
 {{ $configDBSuffix := printf "apollo-config-db-%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
 {{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
+---
 kind: ConfigMap
 apiVersion: v1
 metadata:
