@@ -16,7 +16,7 @@ data:
     apollo.config-service.url = {{ $configServiceFullName }}
     apollo.admin-service.url = {{ $adminServiceFullName }}
     {{- if .Values.configService.config.contextPath }}
-    server.servlet.context-path = {{ .Values.configService.config.contextPath }}
+    server.servlet.context-path = {{ $.Values.configService.config.contextPath }}
     {{- end }}
 {{- end }}
 {{ end }}
