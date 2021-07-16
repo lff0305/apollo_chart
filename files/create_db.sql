@@ -5,8 +5,11 @@
 {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
 {{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
 
+CREATE USER IF NOT EXISTS '{{ $.Values.configdb.userName }}'@'%' IDENTIFIED by '{{ $.Values.configdb.password }}';
+
 create database IF NOT EXISTS {{ $.Values.configdb.dbName }}{{ $configDBSuffix}} DEFAULT CHARACTER SET = utf8mb4;
-grant all on {{ $.Values.configdb.dbName }}{{ $configDBSuffix}}.* to  {{ $.Values.configdb.userName }}@'%' IDENTIFIED by '{{ $.Values.configdb.password }}';
+grant all on {{ $.Values.configdb.dbName }}{{ $configDBSuffix}}.* to  {{ $.Values.configdb.userName }}@'%';
+FLUSH PRIVILEGES;
 
 {{- end }}
 {{ end }}
