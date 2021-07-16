@@ -36,6 +36,9 @@ spec:
               - key: application-github.properties
                 path: application-github.properties
             defaultMode: 420
+        - name: init-db
+        configMap:
+          name: config-{{ . }}-initdb-configmap
       initContainers:
       - name: init-db
         image: flyway/flyway:7.0.2
@@ -54,6 +57,9 @@ spec:
         volumeMounts:
         - name: init-db
           mountPath: /flyway/sql_base64
+        - name: init-db
+          mountPath: /decode_sql.sh
+          subPath: decode_sql.sh
         - name: init-db
           mountPath: /flyway/conf/flyway.conf
           subPath: flyway.conf
