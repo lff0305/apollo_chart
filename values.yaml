@@ -104,4 +104,4 @@ adminService:
   resources: {}
   nodeSelector: {}
   tolerations: []
-  affinity: {}%               
+  affinity: {}         
