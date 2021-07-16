@@ -67,7 +67,7 @@ spec:
             tcpSocket:
               port: {{ .Values.containerPort }}
             initialDelaySeconds: {{ .Values.portalService.liveness.initialDelaySeconds }}
-            periodSeconds: {{ .Values.liveness.periodSeconds }}
+            periodSeconds: {{ .Values.portalService.liveness.periodSeconds }}
           readinessProbe:
             httpGet:
               path: {{ .Values.portalService.config.contextPath }}/health
@@ -75,16 +75,16 @@ spec:
             initialDelaySeconds: {{ .Values.portalService.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.portalService.readiness.periodSeconds }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-    {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.portalService.resources | nindent 12 }}
+    {{- with .Values.portalService.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with .Values.affinity }}
+    {{- with .Values.portalService.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with .Values.tolerations }}
+    {{- with .Values.portalService.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
