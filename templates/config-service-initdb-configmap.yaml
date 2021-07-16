@@ -11,7 +11,7 @@ metadata:
   name: config-{{ $configDBSuffix }}-initdb-configmap
 data:
   {{ set $ "__db" $configDBSuffix }}
-  flyway.conf: {{ tpl ($.Files.Get "files/flyway/config/flyway.conf") $ | quote }}
+  flyway.conf: {{ tpl ($.Files.Get "files/flyway/config/flyway.conf") $ | b64enc }}
   {{ range $path, $bytes := $.Files.Glob "files/flyway/config/sqls/*.*" }}
   {{ base $path }}: "{{ $.Files.Get $path | b64enc }}"
   {{ end }}
