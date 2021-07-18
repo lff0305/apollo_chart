@@ -43,7 +43,7 @@ spec:
           imagePullPolicy: {{ $.Values.adminService.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ $.Values.adminService.containerPort }}
+              containerPort: {{ $.Values.adminService.port }}
               protocol: TCP
           env:
             - name: SPRING_PROFILES_ACTIVE
@@ -64,7 +64,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ $.Values.adminService.config.contextPath }}/health
-              port: {{ $.Values.adminService.containerPort }}
+              port: {{ $.Values.adminService.port }}
             initialDelaySeconds: {{ $.Values.adminService.readiness.initialDelaySeconds }}
             periodSeconds: {{ $.Values.adminService.readiness.periodSeconds }}
           resources:

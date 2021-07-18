@@ -69,7 +69,7 @@ spec:
           imagePullPolicy: {{ $.Values.configService.imagePullPolicy }}
           ports:
             - name: http
-              containerPort: {{ $.Values.configService.containerPort }}
+              containerPort: {{ $.Values.configService.port }}
               protocol: TCP
           env:
             - name: SPRING_PROFILES_ACTIVE
