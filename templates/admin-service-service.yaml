@@ -4,11 +4,12 @@
 {{ $configDBSuffix := printf "%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
 {{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
+{{ $adminServiceDNSName := printf "apollo-admin-service-%s" . -}}
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ $adminServiceFullName }}
+  name: {{ $adminServiceDNSName }}
   labels:
     {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:

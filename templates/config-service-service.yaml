@@ -2,12 +2,13 @@
 {{- with . }}
 {{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
 {{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
+{{ $configServiceDNSName := printf "apollo-config-service-%s" . -}}
 {{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ $configServiceFullName }}
+  name: {{ $configServiceDNSName }}
   labels:
     {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
