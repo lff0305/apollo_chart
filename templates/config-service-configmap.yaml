@@ -14,8 +14,8 @@ data:
     spring.datasource.url = jdbc:mysql://{{ $.Values.configdb.name }}:{{ $.Values.configdb.port }}/{{ $.Values.configdb.dbName }}{{ $configDBSuffix}}{{ if $.Values.configdb.connectionStringProperties }}?{{ $.Values.configdb.connectionStringProperties }}{{ end }}
     spring.datasource.username = {{ required "configdb.userName is required!" $.Values.configdb.userName }}
     spring.datasource.password = {{ required "configdb.password is required!" $.Values.configdb.password }}
-    apollo.config-service.url = http://{{ $configServiceFullName }}:{{ $.Values.configService.service.port }}
-    apollo.admin-service.url = http://{{ $adminServiceFullName }}:{{ $.Values.adminService.service.port }}
+    apollo.config-service.url = http://{{ $configServiceFullName }}:{{ $.Values.configService.port }}
+    apollo.admin-service.url = http://{{ $adminServiceFullName }}:{{ $.Values.adminService.port }}
     {{- if $.Values.configService.config.contextPath }}
     server.servlet.context-path = {{ $.Values.configService.config.contextPath }}
     {{- end }}
