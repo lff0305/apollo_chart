@@ -43,7 +43,7 @@ helm install apollo . -n apollo --set envs[0]=dev --set envs[1]=test --set envs[
 | property name | property value | notes |
 | :-----| ----: | ----: |
 | app.id | application id| Creted in apollo web console  |
-| apollo.configService | Config server address |http://apollo-config-service-<env>:8080  |
+| apollo.configService | Config server address |`http://apollo-config-service-<env>`:8080  |
 | apollo.accesskey.secret | secret for connect to connect to ENV | configured in apollo web console |
 
 # Client Usage
