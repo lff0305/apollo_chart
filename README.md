@@ -40,7 +40,7 @@ The following services will be created
 - If you want to expose the Web Console outside kubernetes, please set the service type as `LoadBalancer` for `apollo-portal` service.
 - If you do not want to expose the Web Console, just run the commond to create a port forward:
 ```
-kubectl port-forward  --address 0.0.0.0 svc/apollo-portal 8080:8080 -n apollo
+kubectl port-forward  --address 0.0.0.0 svc/apollo-portal 8070:8070 -n apollo
 ```
 Then you can access it by `http://<ip address>:8080`
 
@@ -65,7 +65,7 @@ An example for loading configs from pure java api. The following properties need
 | property name | property value | notes |
 | :-----| ----: | ----: |
 | app.id | application id| Creted in apollo web console  |
-| apollo.configService | Config server address |`http://apollo-config-service-<env>.<apollo namespace>.svc.cluster.local:8080`  |
+| apollo.configService | Config server address |`http://apollo-config-service-<env>.<apollo namespace>.svc.cluster.local:8080` By default, the `apollo namespace` is `apollo`  |
 | apollo.accesskey.secret | secret for connect to connect to ENV | configured in apollo web console |
 
 Note: This app is to be delployed under same kubernetes cluster!
