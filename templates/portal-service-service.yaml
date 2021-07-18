@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
-  type: {{ $.Values.portalService.service.type }}
+  type: {{ $.Values.portalService.type }}
   ports:
     - name: http
       protocol: TCP
-      port: {{ $.Values.configService.service.port }}
-      targetPort: {{ $.Values.configService.service.targetPort }}
+      port: {{ $.Values.configService.port }}
+      targetPort: {{ $.Values.configService.port }}
   selector:
     app: {{ .Values.portalService.name }}

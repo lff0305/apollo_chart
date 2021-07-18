@@ -11,12 +11,12 @@ metadata:
   labels:
     {{- include "apollo.service.labels" $ | nindent 4 }}
 spec:
-  type: {{ $.Values.configService.service.type }}
+  type: ClusterIP
   ports:
     - name: http
       protocol: TCP
-      port: {{ $.Values.configService.service.port }}
-      targetPort: {{ $.Values.configService.service.targetPort }}
+      port: {{ $.Values.configService.port }}
+      targetPort: {{ $.Values.configService.port }}
   selector:
     app: {{ $configServiceFullName }}
 {{- end }}

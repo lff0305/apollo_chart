@@ -20,9 +20,6 @@ spec:
       labels:
         app: {{ .Values.configdb.name | quote }}
         release: {{ .Release.Name | quote }}
-      labels:
-        app: {{ .Values.configdb.name | quote }}
-        release: {{ .Release.Name | quote }}
     spec:
       securityContext:
         fsGroup: 1001 
@@ -38,7 +35,7 @@ spec:
       - name: {{ .Values.configdb.name | quote }}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "aaabbbcc"
+          value: {{ .Values.configdb.rootPassword | quote }}
         image: bitnami/mysql:8.0.25
         volumeMounts:
         - mountPath: /docker-entrypoint-initdb.d/create_db.sql
