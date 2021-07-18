@@ -1,8 +1,8 @@
 {{- range .Values.envs }}
 {{- with . }}
 {{ $configDeploymentFullName := printf "apollo-config-deployment-%s" . -}}
-  {{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
-  {{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
+{{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
 ---
 kind: Service
 apiVersion: v1
