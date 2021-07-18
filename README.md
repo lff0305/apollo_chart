@@ -42,7 +42,12 @@ The following services will be created
 ```
 kubectl port-forward  --address 0.0.0.0 svc/apollo-portal 8080:8080 -n apollo
 ```
-Then you can access it by `http://<ip address:8080`
+Then you can access it by `http://<ip address>:8080`
+
+Please login by `apollo` / `admin`
+and change the default password `admin` after you logged in.
+
+Then create the needed `Project`, create `Access Key` and configuration entries.
 
 # To deploy with customerized ENVs
 ```
