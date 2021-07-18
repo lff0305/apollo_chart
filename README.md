@@ -35,6 +35,14 @@ The following services will be created
 | apollo-admin-sit | admin service for env `SIT` |  |
 | apollo-admin-uat | admin service for env `UAT` |  |
 | apollo-admin-prod | admin service for env `PROD` |  |
+# Apollo Web Console
+
+- If you want to expose the Web Console outside kubernetes, please set the service type as `LoadBalancer` for `apollo-portal` service.
+- If you do not want to expose the Web Console, just run the commond to create a port forward:
+```
+kubectl port-forward  --address 0.0.0.0 svc/apollo-portal 8080:8080 -n apollo
+```
+Then you can access it by `http://<ip address:8080`
 
 # To deploy with customerized ENVs
 ```
