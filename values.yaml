@@ -13,7 +13,7 @@ configdb:
   password: "apollo"
   pvc: gp2
   rootPassword: "R39sgj2xo0"
-  connectionStringProperties: characterEncoding=utf8&useSSL=false
+  connectionStringProperties: characterEncoding=utf8&allowPublicKeyRetrieval=false&useSSL=false
   nodeSelector: {}    
     
 
