@@ -47,7 +47,7 @@ An example for loading configs from pure java api:
 public class LoadConfig {
 
     static {
-        System.setProperty("app.id", "cca");
+        System.setProperty("app.id", "appid");
         System.setProperty("apollo.configService", "http://apollo-config-service-dev:8080");
         System.setProperty("apollo.accesskey.secret", "<your secret>");
     }
