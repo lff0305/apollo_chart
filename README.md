@@ -65,16 +65,17 @@ An example for loading configs from pure java api. The following properties need
 | property name | property value | notes |
 | :-----| ----: | ----: |
 | app.id | application id| Creted in apollo web console  |
-| apollo.configService | Config server address |`http://apollo-config-service-<env>:8080`  |
+| apollo.configService | Config server address |`http://apollo-config-service-<env>.<apollo namespace>.svc.cluster.local:8080`  |
 | apollo.accesskey.secret | secret for connect to connect to ENV | configured in apollo web console |
 
+Note: This app is to be delployed under same kubernetes cluster!
 
 ```
 public class LoadConfig {
 
     static {
         System.setProperty("app.id", "appid");
-        System.setProperty("apollo.configService", "http://apollo-config-service-dev:8080");
+        System.setProperty("apollo.configService", "http://apollo-config-service-dev.apollo.svc.cluster.local:8080");
         System.setProperty("apollo.accesskey.secret", "<your secret>");
     }
 
