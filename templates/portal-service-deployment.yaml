@@ -92,13 +92,13 @@ spec:
           {{- end }}
           livenessProbe:
             tcpSocket:
-              port: {{ .Values.portalService.containerPort }}
+              port: {{ .Values.portalService.port }}
             initialDelaySeconds: {{ .Values.portalService.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.portalService.liveness.periodSeconds }}
           readinessProbe:
             httpGet:
               path: {{ .Values.portalService.config.contextPath }}/health
-              port: {{ .Values.portalService.containerPort }}
+              port: {{ .Values.portalService.port }}
             initialDelaySeconds: {{ .Values.portalService.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.portalService.readiness.periodSeconds }}
           resources:

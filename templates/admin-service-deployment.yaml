@@ -58,7 +58,7 @@ spec:
               subPath: application-github.properties
           livenessProbe:
             tcpSocket:
-              port: {{ $.Values.adminService.containerPort }}
+              port: {{ $.Values.adminService.port }}
             initialDelaySeconds: {{ $.Values.adminService.liveness.initialDelaySeconds }}
             periodSeconds: {{ $.Values.adminService.liveness.periodSeconds }}
           readinessProbe:

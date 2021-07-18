@@ -84,13 +84,13 @@ spec:
               subPath: application-github.properties
           livenessProbe:
             tcpSocket:
-              port: {{ $.Values.configService.containerPort }}
+              port: {{ $.Values.configService.port }}
             initialDelaySeconds: {{ $.Values.configService.liveness.initialDelaySeconds }}
             periodSeconds: {{ $.Values.configService.liveness.periodSeconds }}
           readinessProbe:
             httpGet:
               path: {{ $.Values.configService.config.contextPath }}/health
-              port: {{ $.Values.configService.containerPort }}
+              port: {{ $.Values.configService.port }}
             initialDelaySeconds: {{ $.Values.configService.readiness.initialDelaySeconds }}
             periodSeconds: {{ $.Values.configService.readiness.periodSeconds }}
           resources:
