@@ -22,7 +22,7 @@ The following services will be created
 
 
 | pod name | usage | notes |
-| :-----| ----: | :----: |
+| :-----| ----: | ----: |
 | apollo-configdb | My SQL Server | Check env for `MYSQL_ROOT_PASSWORD` for root password |
 | apollo-portal | Portal service |  |
 | apollo-config-dev | config service for env `DEV` |  |
