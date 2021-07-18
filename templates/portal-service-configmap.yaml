@@ -15,8 +15,9 @@ data:
     {{- range .Values.envs }}
     {{- with . }}
     {{ $env := printf "%s" . -}}
-    {{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-    {{ $env }}.meta = http://{{ printf "apollo-config-service-%s" . }}:{{ $.Values.configService.port }}
+    {{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
+    {{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
+    {{ $env }}.meta = http://{{ $$configServiceFullName }}:{{ $.Values.configService.port }}
     {{- end }}
     {{ end }}    
 {{- range $fileName, $content := .Values.portalService.config.files }}

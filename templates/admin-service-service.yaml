@@ -2,8 +2,8 @@
 {{- with . }}
 {{ $configMapFullName := printf "apollo-configmap-%s" . -}}
 {{ $configDBSuffix := printf "%s" . -}}
-{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-{{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
+  {{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
+  {{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace. -}}
 ---
 kind: Service
 apiVersion: v1
