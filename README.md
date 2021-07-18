@@ -53,6 +53,13 @@ Then create the needed `Project`, create `Access Key` and configuration entries.
 ```
 helm install apollo . -n apollo --set envs[0]=dev --set envs[1]=test --set envs[2]=sandbox
 ```
+# To deploy with customerized PVC type
+The PVC is used to store data for MySQL DB. By default the AWS/EKS PVC storage class type `gp2` is used.
+If you need another type, overwrite the `configdb.pvc` value:
+```
+helm install apollo . -n apollo --set configdb.pvc=<your storage class type>
+```
+
 # Client Usage
 An example for loading configs from pure java api. The following properties needs to be changed:
 | property name | property value | notes |
