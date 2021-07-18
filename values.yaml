@@ -123,4 +123,4 @@ portalService:
 
 portaldb:
   dbName: ApolloPortalDB
-  connectionStringProperties: characterEncoding=utf8&useSSL=false
+  connectionStringProperties: characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=false

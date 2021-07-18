@@ -9,7 +9,7 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: {{ $.Values.configService.port }}
-      targetPort: {{ $.Values.configService.port }}
+      port: {{ $.Values.portalService.port }}
+      targetPort: {{ $.Values.portalService.port }}
   selector:
     app: {{ .Values.portalService.name }}
