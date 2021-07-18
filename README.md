@@ -33,3 +33,8 @@ The following services will be created
 | apollo-admin-sit | admin service for env `SIT` |  |
 | apollo-admin-uat | admin service for env `UAT` |  |
 | apollo-admin-prod | admin service for env `PROD` |  |
+
+# To deploy with customerized ENVs
+```
+helm install apollo . -n apollo --set envs[0]=dev --set envs[1]=test --set envs[2]=sandbox
+```
