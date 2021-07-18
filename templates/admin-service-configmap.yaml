@@ -2,14 +2,15 @@
 {{- with . }}
 {{ $configMapFullName := printf "apollo-configmap-%s" . -}}
 {{ $configDBSuffix := printf "%s" . -}}
-{{ $configServiceFullName := printf "apollo-config-service-%s" . -}}
-{{ $adminServiceFullName := printf "apollo-admin-service-%s" . -}}
+{{ $configServiceFullName := printf "apollo-config-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
+{{ $adminServiceFullName := printf "apollo-admin-service-%s.%s.svc.cluster.local" $.Release.Namespace . -}}
+{{ $adminServiceDNSName := printf "apollo-admin-service-%s" . -}}
 ---
 # configmap for apollo-adminservice
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ $adminServiceFullName }}
+  name: {{ $adminServiceDNSName }}
 data:
   application-github.properties: |
     spring.datasource.url = jdbc:mysql://{{ $.Values.configdb.name }}:{{ $.Values.configdb.port }}/{{ $.Values.configdb.dbName }}{{ $configDBSuffix}}{{ if $.Values.configdb.connectionStringProperties }}?{{ $.Values.configdb.connectionStringProperties }}{{ end }}
