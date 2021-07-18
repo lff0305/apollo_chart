@@ -1,10 +1,12 @@
+# General i=Info
+
 This is a helm chart for installing apollo services in k8s.
 
 Requirement:
 - helm3
 - A persistent storage (By default, AWS EKS / gp2 is used)
 
-Usage:
+# Usage
 
 Clone the repo and run commnad 
 ```
