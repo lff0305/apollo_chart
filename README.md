@@ -1,4 +1,4 @@
-# General i=Info
+# General info
 
 This is a helm chart for installing apollo services in k8s.
 
