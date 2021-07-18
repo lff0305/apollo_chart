@@ -40,3 +40,40 @@ The following services will be created
 ```
 helm install apollo . -n apollo --set envs[0]=dev --set envs[1]=test --set envs[2]=sandbox
 ```
+
+# Client Usage
+An example for loading configs from pure java api:
+```
+public class LoadConfig {
+
+    static {
+        System.setProperty("app.id", "cca");
+        System.setProperty("apollo.configService", "http://apollo-config-service-dev:8080");
+        System.setProperty("apollo.accesskey.secret", "<your secret>");
+    }
+
+    public static void main(String[] argu) throws InterruptedException {
+
+        System.out.println(System.getProperty("app.id"));
+        System.out.println(System.getProperty("apollo.config-service"));
+
+        Config config = ConfigService.getConfig("application"); //config instance is singleton for each namespace and is never null
+        String someKey = "timeout";
+        String someDefaultValue = "50s";
+        Set<String> value = config.getPropertyNames();
+        System.out.println(value);
+        System.out.println(config.getProperty(someKey, "na"));
+
+        config.addChangeListener( event -> {
+            Set<String> keys = event.changedKeys();
+            String ns = event.getNamespace();
+            System.out.println("Changed " + ns + keys);
+            for (String key : keys) {
+                System.out.println(key + " " + event.getChange(key));
+            }
+        });
+
+        Thread.sleep(1000000);
+    }
+}
+```
