@@ -19,6 +19,6 @@ spec:
       port: {{ $.Values.configService.port }}
       targetPort: {{ $.Values.configService.port }}
   selector:
-    app: {{ $configServiceFullName }}
+    app: {{ $configServiceDNSName }}
 {{- end }}
 {{ end }}
