@@ -69,10 +69,10 @@ adminService:
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   liveness:
-    initialDelaySeconds: 100
+    initialDelaySeconds: 120
     periodSeconds: 10
   readiness:
-    initialDelaySeconds: 30
+    initialDelaySeconds: 120
     periodSeconds: 5
   config:
     # spring profiles to activate
@@ -99,10 +99,10 @@ portalService:
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   liveness:
-    initialDelaySeconds: 100
+    initialDelaySeconds: 120
     periodSeconds: 10
   readiness:
-    initialDelaySeconds: 30
+    initialDelaySeconds: 120
     periodSeconds: 5
   env: {}
   strategy: {}
