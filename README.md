@@ -38,7 +38,7 @@ The following services will be created:
 
 *TO update root password*, add the following parametes, like
 ```
---set configdb.rootPassword=aaabbbcccddd
+helm install apollo . -n apollo --set configdb.rootPassword=aaabbbcccddd
 ```
 
 # Apollo Web Console
