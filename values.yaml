@@ -3,7 +3,11 @@ envs:
 - sit
 - uat
 - prod
-  
+
+flyway:
+  imageName: flyway/flyway
+  imageTag: 7.11.2
+
 configdb:
   enabled: true
   imageName: bitnami/mysql
