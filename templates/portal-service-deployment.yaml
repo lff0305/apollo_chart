@@ -48,7 +48,7 @@ spec:
         - -c
         image: {{ .Values.configdb.imageName }}:{{ .Values.configdb.imageTag }}
       - name: init-db
-        image: flyway/flyway:7.0.2
+        image: {{ .Values.flyway.imageName }}:{{ .Values.flyway.imageTag }}
         command: ["/bin/sh"]
         args: ["-c", "cd / && sh decode_sql.sh && flyway migrate"]
         # args: ["migrate"]
