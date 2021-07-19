@@ -20,6 +20,6 @@ spec:
       port: {{ $.Values.adminService.port }}
       targetPort: {{ $.Values.adminService.port }}
   selector:
-    app: {{ $adminServiceFullName }}
+    app: {{ $adminServiceDNSName }}
 {{- end }}
 {{ end }}
