@@ -40,6 +40,13 @@ spec:
           configMap:
             name: portal-initdb-configmap
       initContainers:
+      - name: test-mysql
+        args:
+        - mysql -h {{ $.Values.configdb.name }} -P {{ $.Values.configdb.port }} -D {{ $.Values.portaldb.dbName }}{{ .}} -u {{ $.Values.configdb.userName }} -p{{ $.Values.configdb.password }} -e "show tables"
+        command:
+        - /bin/sh
+        - -c
+        image: {{ $.Values.configdb.imageName }}:{{ $.Values.configdb.imageTag }}
       - name: init-db
         image: flyway/flyway:7.0.2
         command: ["/bin/sh"]

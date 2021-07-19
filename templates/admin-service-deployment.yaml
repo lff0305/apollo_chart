@@ -37,6 +37,14 @@ spec:
               - key: application-github.properties
                 path: application-github.properties
             defaultMode: 420
+      initContainers:
+      - name: test-mysql
+        args:
+        - mysql -h {{ $.Values.configdb.name }} -P {{ $.Values.configdb.port }} -D {{ $.Values.configdb.dbName }}{{ .}} -u {{ $.Values.configdb.userName }} -p{{ $.Values.configdb.password }} -e "show tables"
+        command:
+        - /bin/sh
+        - -c
+        image: {{ $.Values.configdb.imageName }}:{{ $.Values.configdb.imageTag }}
       containers:
         - name: {{ $.Values.adminService.name }}
           image: "{{ $.Values.adminService.image.repository }}:{{ $.Values.adminService.image.tag | default $.Chart.AppVersion }}"

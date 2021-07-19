@@ -46,7 +46,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        image: bitnami/mysql:8.0.25
+        image: {{ $.Values.configdb.imageName }}:{{ $.Values.configdb.imageTag }}
       - name: init-db
         image: flyway/flyway:7.0.2
         command: ["/bin/sh"]
