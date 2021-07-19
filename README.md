@@ -25,7 +25,7 @@ The following services will be created:
 
 | pod name | usage | notes |
 | :-----| ----: | ----: |
-| apollo-configdb | My SQL Server | Check env for `MYSQL_ROOT_PASSWORD` for root password |
+| apollo-configdb | My SQL Server | root password is `7zdXc72yzpNMzIVL9Z9N` |
 | apollo-portal | Portal service |  |
 | apollo-config-dev | config service for env `DEV` |  |
 | apollo-config-sit | config service for env `SIT` |  |
@@ -35,6 +35,12 @@ The following services will be created:
 | apollo-admin-sit | admin service for env `SIT` |  |
 | apollo-admin-uat | admin service for env `UAT` |  |
 | apollo-admin-prod | admin service for env `PROD` |  |
+
+*TO update root password*, add the following parametes, like
+```
+--set configdb.rootPassword=aaabbbcccddd
+```
+
 # Apollo Web Console
 
 - If you want to expose the Web Console outside kubernetes, please set the service type as `LoadBalancer` for `apollo-portal` service.
