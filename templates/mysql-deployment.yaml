@@ -35,7 +35,7 @@ spec:
       - name: {{ .Values.configdb.name | quote }}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: {{ randAlphaNum 20 | quote }}
+          value: {{ .Values.configdb.rootPassword | quote }}
         image: {{ .Values.configdb.imageName }}:{{ .Values.configdb.imageTag }}
         volumeMounts:
         - mountPath: /docker-entrypoint-initdb.d/create_db.sql

@@ -14,7 +14,7 @@ configdb:
   userName: "apollo"
   password: "apollo"
   pvc: gp2
-  rootPassword: "R39sgj2xo0"
+  rootPassword: "7zdXc72yzpNMzIVL9Z9N"
   connectionStringProperties: characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
   nodeSelector: {}    
     
