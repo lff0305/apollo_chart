@@ -36,7 +36,7 @@ spec:
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: {{ randAlphaNum 20 | quote }}
-        image: bitnami/mysql:8.0.25
+        image: {{ .Values.configdb.imageName }}:{{ .Values.configdb.imageTag }}
         volumeMounts:
         - mountPath: /docker-entrypoint-initdb.d/create_db.sql
           name: config

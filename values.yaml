@@ -6,6 +6,8 @@ envs:
   
 configdb:
   enabled: true
+  imageName: bitnami/mysql
+  imageTag: 8.0.25-debian-10-r4
   name: apollo-configdb
   port: 3306
   dbName: ApolloConfigDB
