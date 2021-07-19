@@ -89,17 +89,17 @@ spec:
             - name: volume-configmap-{{ $configMapFullName }}
               mountPath: /apollo-configservice/config/application-github.properties
               subPath: application-github.properties
-          livenessProbe:
-            tcpSocket:
-              port: {{ $.Values.configService.port }}
-            initialDelaySeconds: {{ $.Values.configService.liveness.initialDelaySeconds }}
-            periodSeconds: {{ $.Values.configService.liveness.periodSeconds }}
           readinessProbe:
-            httpGet:
-              path: {{ $.Values.configService.config.contextPath }}/health
+            tcpSocket:
               port: {{ $.Values.configService.port }}
             initialDelaySeconds: {{ $.Values.configService.readiness.initialDelaySeconds }}
             periodSeconds: {{ $.Values.configService.readiness.periodSeconds }}
+          livenessProbe:
+            httpGet:
+              path: {{ $.Values.configService.config.contextPath }}/health
+              port: {{ $.Values.configService.port }}
+            initialDelaySeconds: {{ $.Values.configService.liveness.initialDelaySeconds }}
+            periodSeconds: {{ $.Values.configService.liveness.periodSeconds }}
           resources:
             {{- toYaml $.Values.configService.resources | nindent 12 }}
     {{- with $.Values.configService.nodeSelector }}
