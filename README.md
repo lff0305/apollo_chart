@@ -38,7 +38,7 @@ The following services will be created:
 | apollo-admin-uat | admin service for env `UAT` |  |
 | apollo-admin-prod | admin service for env `PROD` |  |
 
-*TO update root password*, add the following parametes, like
+**TO update root password**, add the following parametes, like
 ```
 helm install apollo . -n apollo --set configdb.rootPassword=aaabbbcccddd
 ```
