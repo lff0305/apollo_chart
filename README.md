@@ -1,6 +1,8 @@
 # General info
 
-This is a helm chart for installing apollo services in k8s.
+This is a helm chart for installing a whole stack for Ctrip Apollo Services in k8s.
+
+See https://github.com/ctripcorp/apollo for details for apollo configuration center.
 
 Requirement:
 - helm3
