@@ -12,7 +12,7 @@ Requirement:
 
 Clone the repo and run commnad 
 ```
-kubectl create ns apollo                  /// It is recommonded a new namespace is created
+kubectl create ns apollo                  /// It is recommended a new namespace is created
 helm install apollo . -n apollo
 ```
 
