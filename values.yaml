@@ -13,7 +13,7 @@ configdb:
   password: "apollo"
   pvc: gp2
   rootPassword: "R39sgj2xo0"
-  connectionStringProperties: characterEncoding=utf8&allowPublicKeyRetrieval=false&useSSL=false
+  connectionStringProperties: characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
   nodeSelector: {}    
     
 
@@ -123,4 +123,4 @@ portalService:
 
 portaldb:
   dbName: ApolloPortalDB
-  connectionStringProperties: characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=false
+  connectionStringProperties: characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
