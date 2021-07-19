@@ -40,6 +40,13 @@ spec:
           configMap:
             name: config-{{ . }}-initdb-configmap
       initContainers:
+      - name: test-mysql
+        args:
+        - mysql -h {{ $.Values.configdb.name }} -P {{ $.Values.configdb.port }} -D {{ $.Values.configdb.dbName }}{{ .}} -e "show tables"
+        command:
+        - /bin/sh
+        - -c
+        image: bitnami/mysql:8.0.25
       - name: init-db
         image: flyway/flyway:7.0.2
         command: ["/bin/sh"]
