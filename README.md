@@ -20,7 +20,7 @@ By default, the following ENVs will be created for apollo:
 - uat
 - prod
 
-The following services will be created
+The following services will be created:
 
 
 | pod name | usage | notes |
