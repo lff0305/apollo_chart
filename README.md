@@ -1,6 +1,6 @@
 # General info
 
-This is a helm chart for installing a whole stack for Ctrip Apollo Services in k8s.
+This is a helm chart for installing a whole stack for Ctrip Apollo Services in k8s / AWS EKS
 
 See https://github.com/ctripcorp/apollo for details for apollo configuration center.
 
