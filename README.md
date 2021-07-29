@@ -27,7 +27,7 @@ The following services will be created:
 
 | pod name | usage | notes |
 | :-----| ----: | ----: |
-| apollo-configdb | My SQL Server | root password is `7zdXc72yzpNMzIVL9Z9N` |
+| apollo-configdb | MySQL Server | root password is `7zdXc72yzpNMzIVL9Z9N` |
 | apollo-portal | Portal service |  |
 | apollo-config-dev | config service for env `DEV` |  |
 | apollo-config-sit | config service for env `SIT` |  |
