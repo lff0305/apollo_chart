@@ -46,8 +46,8 @@ helm install apollo . -n apollo --set configdb.rootPassword=aaabbbcccddd
 # Apollo Web Console
 
 - If you want to expose the Web Console outside kubernetes, please set the service type as `LoadBalancer` for `apollo-portal` service. Do NOT forget to protect the service by
-    - Firewall Rules (Security Group)-
-    - Change the default password for user apollo-
+    - Firewall Rules/Security Group
+    - Change the default password for user apollo
     - Set Access Key in apollo
 - If you do not want to expose the Web Console, just run the commond to create a port forward:
 ```
