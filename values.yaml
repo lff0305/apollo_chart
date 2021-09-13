@@ -6,7 +6,7 @@ envs:
 
 flyway:
   imageName: flyway/flyway
-  imageTag: 7.11.2
+  imageTag: 7.15
 
 configdb:
   enabled: true
