@@ -28,7 +28,7 @@ configService:
   replicaCount: 1
   port: 8080
   imageName: apolloconfig/apollo-configservice
-  imageTag: 1.8.2
+  imageTag: "1.9.1"
   imagePullPolicy: IfNotPresent
   # imageTag: latest
   imagePullSecrets: []
@@ -69,7 +69,7 @@ adminService:
   port: 8090
   image:
     repository: apolloconfig/apollo-adminservice
-    tag: "1.8.2"
+    tag: 1.9.1
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   liveness:
@@ -99,7 +99,7 @@ portalService:
   type: ClusterIP
   image:
     repository: apolloconfig/apollo-portal
-    tag: "1.8.2"
+    tag: "1.9.1"
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   liveness:
